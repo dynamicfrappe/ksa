@@ -13,7 +13,13 @@ def setup(company=None, patch=True):
 	add_print_formats()
 	add_permissions()
 	make_custom_fields()
+	add_symbol()
 
+
+def add_symbol():
+	if frappe.db.exists("Currency", "SAR"):
+		symbol = """<span style='font-family:"Claudion" ;'>⃀</span>"""
+		frappe.db.set_value("Currency", "SAR", "symbol", symbol)
 
 def add_print_formats():
 	frappe.reload_doc("regional", "print_format", "detailed_tax_invoice", force=True)
